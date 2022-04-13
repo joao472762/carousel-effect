@@ -1,16 +1,11 @@
 let handleCarosel = {
     carousel: document.getElementById('carousel'),
     actualyWidht: carousel.offsetWidth,
-    
-    
-   
-    
-    carouselVisibleWidth(){
 
+    carouselVisibleWidth(){
        return handleCarosel.carousel.offsetWidth
-    
-       
     },
+
     carouselTotalWidth(){
         
         return handleCarosel.carousel.scrollWidth
@@ -18,20 +13,18 @@ let handleCarosel = {
     
 
     scrollToRight(){
-        if(this.actualyWidht <= 20){
-            this.actualyWidht = this.carouselVisibleWidth()
+        if(handleCarosel.actualyWidht <= 20){
+            handleCarosel.actualyWidht = handleCarosel.carouselVisibleWidth()
         }
-        this.actualyWidht += this.carouselVisibleWidth()
+        handleCarosel.actualyWidht += this.carouselVisibleWidth()
         handleCarosel.carousel.scrollLeft += this.carouselVisibleWidth()
         handleArrow.exucute()
-
-        
-     
-        
-       
       
     },
     scrollToLeft(){
+        if(handleCarosel.actualyWidht >= handleCarosel.carouselTotalWidth()){
+            handleCarosel.actualyWidht = handleCarosel.carouselTotalWidth()
+        }
        
         this.actualyWidht -= this.carouselVisibleWidth()
         handleCarosel.carousel.scrollLeft -= this.carouselVisibleWidth()
@@ -41,12 +34,10 @@ let handleCarosel = {
     
 }
 let handleArrow = {
-    count:0,
         
-    leftArrow(){
-        let {actualyWidht,carouselTotalWidth,carouselVisibleWidth} = handleCarosel
+    leftArrow(actualyWidht=0,carouselVisibleWidth=0){
        
-        if(actualyWidht > carouselVisibleWidth()){
+        if(actualyWidht > carouselVisibleWidth){
             let leftArrow = document.getElementById('leftArrow')
             leftArrow.style.opacity = 1
             
@@ -60,9 +51,9 @@ let handleArrow = {
         
         
     },
-    rightArrow(){
-        let {actualyWidht, carouselTotalWidth, carouselVisibleWidth} = handleCarosel
-        if(actualyWidht >= carouselTotalWidth()){
+    rightArrow(actualyWidht=0, carouselTotalWidth=0){
+
+        if(actualyWidht +20 >= carouselTotalWidth){
             let rightArrow = document.getElementById('rightArrow');
             rightArrow.style.opacity = 0
         }
@@ -76,18 +67,15 @@ let handleArrow = {
         if(actualyWidht < 0){
             actualyWidht = carouselVisibleWidth()
         }
-        
-        if(actualyWidht > carouselTotalWidth()){
-            actualyWidht = 0
-            actualyWidht= 2500
-            
-            
-            
+        if(actualyWidht >= 2816){
+            actualyWidht = carouselTotalWidth()
         }
         
+       
+        
         try {
-            this.rightArrow()
-            this.leftArrow()
+            this.rightArrow(actualyWidht,carouselTotalWidth())
+            this.leftArrow(actualyWidht,carouselVisibleWidth())
             
         } catch (error) {
             console.error(error)
