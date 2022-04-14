@@ -1,33 +1,31 @@
-let handleCarosel = {
+let handleCaruousel = {
     carousel: document.getElementById('carousel'),
     actualyWidht: carousel.offsetWidth,
 
     carouselVisibleWidth(){
-       return handleCarosel.carousel.offsetWidth
+       return handleCaruousel.carousel.offsetWidth
     },
 
     carouselTotalWidth(){
         
-        return handleCarosel.carousel.scrollWidth
+        return handleCaruousel.carousel.scrollWidth
     },
-    
-
     scrollToRight(){
-        if(handleCarosel.actualyWidht <= 20){
-            handleCarosel.actualyWidht = handleCarosel.carouselVisibleWidth()
+        if(handleCaruousel.actualyWidht <= 20){
+            handleCaruousel.actualyWidht = handleCaruousel.carouselVisibleWidth()
         }
-        handleCarosel.actualyWidht += this.carouselVisibleWidth()
-        handleCarosel.carousel.scrollLeft += this.carouselVisibleWidth()
+        handleCaruousel.actualyWidht += this.carouselVisibleWidth()
+        handleCaruousel.carousel.scrollLeft += this.carouselVisibleWidth()
         handleArrow.exucute()
       
     },
     scrollToLeft(){
-        if(handleCarosel.actualyWidht >= handleCarosel.carouselTotalWidth()){
-            handleCarosel.actualyWidht = handleCarosel.carouselTotalWidth()
+        if(handleCaruousel.actualyWidht >= handleCaruousel.carouselTotalWidth()){
+            handleCaruousel.actualyWidht = handleCaruousel.carouselTotalWidth()
         }
        
         this.actualyWidht -= this.carouselVisibleWidth()
-        handleCarosel.carousel.scrollLeft -= this.carouselVisibleWidth()
+        handleCaruousel.carousel.scrollLeft -= this.carouselVisibleWidth()
         handleArrow.exucute()
       
     },
@@ -63,19 +61,18 @@ let handleArrow = {
         }
     },
     exucute(){
-        let {actualyWidht, carouselTotalWidth, carouselVisibleWidth} = handleCarosel
+        let {actualyWidht, carouselTotalWidth, carouselVisibleWidth} = handleCaruousel
         if(actualyWidht < 0){
             actualyWidht = carouselVisibleWidth()
         }
-        if(actualyWidht >= 2816){
+        if(actualyWidht >= carouselTotalWidth()){
             actualyWidht = carouselTotalWidth()
         }
         
-       
-        
+
         try {
-            this.rightArrow(actualyWidht,carouselTotalWidth())
-            this.leftArrow(actualyWidht,carouselVisibleWidth())
+            handleArrow.rightArrow(actualyWidht,carouselTotalWidth())
+            handleArrow.leftArrow(actualyWidht,carouselVisibleWidth())
             
         } catch (error) {
             console.error(error)
