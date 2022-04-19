@@ -1,31 +1,34 @@
 let handleCaruousel = {
+    /*declared variables that will work on all hadle Carousel*/
     carousel: document.getElementById('carousel'),
     actualyWidht: carousel.offsetWidth,
-
+    //function that will return my carousel View Width
     carouselVisibleWidth(){
        return handleCaruousel.carousel.offsetWidth
     },
-
+    //function that will return the carousel total widht
     carouselTotalWidth(){
         
         return handleCaruousel.carousel.scrollWidth
     },
+    //function that will move my carrousel Scrool to right 
     scrollToRight(){
         if(handleCaruousel.actualyWidht <= 20){
             handleCaruousel.actualyWidht = handleCaruousel.carouselVisibleWidth()
         }
-        handleCaruousel.actualyWidht += this.carouselVisibleWidth()
-        handleCaruousel.carousel.scrollLeft += this.carouselVisibleWidth()
+        handleCaruousel.actualyWidht += handleCaruousel.carouselVisibleWidth()
+        handleCaruousel.carousel.scrollLeft += handleCaruousel.carouselVisibleWidth()
         handleArrow.exucute()
       
     },
+    //function that will move my carrousel Scrool to left
     scrollToLeft(){
         if(handleCaruousel.actualyWidht >= handleCaruousel.carouselTotalWidth()){
             handleCaruousel.actualyWidht = handleCaruousel.carouselTotalWidth()
         }
        
-        this.actualyWidht -= this.carouselVisibleWidth()
-        handleCaruousel.carousel.scrollLeft -= this.carouselVisibleWidth()
+        handleCaruousel.actualyWidht -= handleCaruousel.carouselVisibleWidth()
+        handleCaruousel.carousel.scrollLeft -= handleCaruousel.carouselVisibleWidth()
         handleArrow.exucute()
       
     },
@@ -78,9 +81,10 @@ let handleArrow = {
             console.error(error)
             
         }
-        console.log(`actualyWidht = ${actualyWidht}
-        visible = ${carouselVisibleWidth()}
-        totalWidht${carouselTotalWidth()}`)
+        console.log(
+           `actualyWidht = ${actualyWidht}
+            visible = ${carouselVisibleWidth()}
+            totalWidht${carouselTotalWidth()}`)
     }
 }
 
